@@ -147,7 +147,7 @@ return obje;
 console.log(periyotSkoru(takimSkoru)) 
 
 
-/* 
+/* //
 MAÇ UZAMAZ ise skorTabelasi(periyotSkoru,takimSkoru,4)
   
 [
