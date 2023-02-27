@@ -52,6 +52,11 @@ let skor = 0;
 function skor2() {
   return skor++;
 }
+/*
+skor1 fonksiyonu, bağımsız bir kapanış oluşturarak skor değişkeninin değerini saklar ve her çağrıda bir artırarak döndürür. 
+skor2 fonksiyonu ise global bir değişkene bağlı olduğundan, kodun başka yerlerinde tanımlanmış bir skor değişkenine de etki edebilir ve 
+her çağrıda global değişkenin değerini bir artırarak döndürür.
+*/
 
 
 /* Görev 2: takimSkoru() 
@@ -64,9 +69,13 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru() {
+  const min = 10;
+  const max = 25;
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+console.log(takimSkoru());
 
 
 
@@ -86,12 +95,30 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(skor,no){
+  
+
+  let evsahibiSkor =0;
+  let konukSkor = 0;
+  for(let i=0;i<no;i++){
+  
+  evsahibiSkor=evsahibiSkor +skor();
+  }
+  
+  for(let i=0;i<no;i++){
+  
+    konukSkor=konukSkor + skor(); 
+    }
+  
+  const obje ={
+  "EvSahibi" : evsahibiSkor,
+  "KonukTakim" : konukSkor,
+  
+  };
+  
+return obje  
 }
-
-
-
+  macSonucu(takimSkoru,4);
 
 
 
@@ -108,22 +135,19 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
 }
   */
 
+function periyotSkoru(SkorPeriyot) {
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+const obje = {
+  "EvSahibi": SkorPeriyot(),
+  "KonukTakim": SkorPeriyot(),
+}
+return obje;
 
 }
+console.log(periyotSkoru(takimSkoru)) 
 
 
-/* Zorlayıcı Görev 5: skorTabelasi() 
-Aşağıdaki skorTabelasi() fonksiyonunu kullanarak aşağıdakileri yapınız:
-  1. İlk parametre olarak Görev 4'te oluşturduğumuz 'periyotSkoru'nu bir değişken olarak almalı
-  2. İkinci parametre olarak Gröev 2'de oluşturduğumuz 'takimSkoru'nu bir değişken olarak almalı
-  3. Üçüncü parametre olarak da oynanacak olan çeyrek sayısını alın
-  4. Her bir çeyreğin sonucunu bir string olarak bir array içinde dönün. Aşadaki örnek gibi olmalı. Her çeyrekteki atılan sayıları ayrı ayrı yazmalı(toplam skoru değil!).
-  5. Eğer maç berabere biterse uzatmalar oynanmalı ve "Uzatma 1: Ev Sahibi 13 - Konuk Takım 11" eklemeli. (Her uzatma için ayrı ayrı eklemeli)
-  6. Maç bitince de final skoru yazmalı: "Maç Sonucu: Ev Sahibi 101 - Konuk Takım 98"
-
+/* 
 MAÇ UZAMAZ ise skorTabelasi(periyotSkoru,takimSkoru,4)
   
 [
@@ -143,12 +167,45 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
   "1. Uzatma: Ev Sahibi 10 - Konuk Takım 6" 
   "Maç Sonucu: Ev Sahibi 71 - Konuk Takım 67"  
 ]
-] */
+] 
+
+Zorlayıcı Görev 5: skorTabelasi() 
+Aşağıdaki skorTabelasi() fonksiyonunu kullanarak aşağıdakileri yapınız:
+  1. İlk parametre olarak Görev 4'te oluşturduğumuz 'periyotSkoru'nu bir değişken olarak almalı
+  2. İkinci parametre olarak Gröev 2'de oluşturduğumuz 'takimSkoru'nu bir değişken olarak almalı
+  3. Üçüncü parametre olarak da oynanacak olan çeyrek sayısını alın
+  4. Her bir çeyreğin sonucunu bir string olarak bir array içinde dönün. Aşadaki örnek gibi olmalı. Her çeyrekteki atılan sayıları ayrı ayrı yazmalı
+  (toplam skoru değil!).
+  5. Eğer maç berabere biterse uzatmalar oynanmalı ve "Uzatma 1: Ev Sahibi 13 - Konuk Takım 11" eklemeli. (Her uzatma için ayrı ayrı eklemeli)
+  6. Maç bitince de final skoru yazmalı: "Maç Sonucu: Ev Sahibi 101 - Konuk Takım 98"
+
+*/
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function skorTabelasi(periyotSkoruCb,takimSkoruCb,ceyrekSayisi) {
+
+const scoreListArray = [
+  "1. Periyot: Ev Sahibi 10 - Konuk Takım 21", 
+  "2. Periyot: Ev Sahibi 20 - Konuk Takım 13",
+  "3. Periyot: Ev Sahibi 13 - Konuk Takım 9", 
+  "4. Periyot: Ev Sahibi 18 - Konuk Takım 11", 
+  "Maç Sonucu: Ev Sahibi 61 - Konuk Takım 54"  
+]
+
+for (let i=0; i<= ceyrekSayisi; i++) {
+  scoreListArray.push(
+    `${i}. Periyot: Ev Sahibi 10 - Konuk Takım`
+    
+    ) 
 }
+
+return scoreListArray
+
+}
+skorTabelasi(periyotSkoru,takimSkoru,4)
+
+
+
 
 
 
